@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.httpapi.bmt.dao.CartDao">
+
+
+    <insert id="shoporder" >
+
+        insert  into shop_cart (commodity_id,user_id) values (#{shopid},#{userid})
+
+    </insert>
+
+    <select id="shoplist"   resultType="java.util.Map">
+      select shop_cart.cart_nums,shop_cart.id as cid,shop_commodity.* FROM shop_cart,shop_commodity where shop_commodity.id=shop_cart.commodity_id and user_id=#{userid}
+    </select>
+
+<delete id="deletecar">
+
+    delete from shop_cart where id=#{cid}
+
+
+</delete>
+
+
+    <select id="Checkcar"   resultType="java.util.Map">
+      select  * from shop_cart where commodity_id=#{shopid} and user_id=#{userid}
+    </select>
+
+  <insert id="Addorder">
+      insert  into shop_order(user_id,commodity_id,order_total,order_size,order_number) values
+      <foreach collection="list" item="s"  separator="," close=";">
+           (#{s.uid},#{s.sid},#{s.total},#{s.size},#{ordernumber})
+      </foreach>
+  </insert>
+
+
+
+    <update id="changemoney">
+
+     update shop_user set user_money=#{userMoney} where id=#{userid}
+
+    </update>
+
+    <delete id="deletCar">
+       DELETE from shop_cart where user_id=#{userid}
+    </delete>
+    <select id="SelectOrder"   resultType="java.util.Map">
+   select  * from shop_commodity as a left join shop_order as b on a.id=b.commodity_id where b.user_id=#{userid} and  b.order_status=#{status}
+    </select>
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.httpapi.bmt.dao.StudentDao">
+    <select id="finallmessage"  resultType="com.httpapi.bmt.model.Student"  >
+     select * from shop_user
+  </select>
+<select id="index" resultType="com.httpapi.bmt.model.shop_commodity" parameterType="Integer" >
+    select * from shop_commodity  order by id desc limit #{StartPage},#{TotalPage}
+
+</select>
+    <select id="ShowListGoods" parameterType="Integer" resultType="com.httpapi.bmt.model.shop_commodity">
+        select  * from shop_commodity where id=#{id}
+
+
+    </select>
+
+    <select id="ShowListbyGoods" parameterType="String" resultType="com.httpapi.bmt.model.shop_commodity">
+        select  * from shop_commodity where commodity_brand=#{bread}
+
+
+    </select>
+
+
+
+</mapper>

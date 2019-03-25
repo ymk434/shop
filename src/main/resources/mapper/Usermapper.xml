@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.httpapi.bmt.dao.UserDao">
+
+    <select id="login"  resultType="com.httpapi.bmt.model.Student">
+        select * from  shop_user where user_name=#{phone} and  user_pwd=#{pwd}
+    </select>
+    <insert id="insertUser">
+
+        insert  into shop_user(user_name,user_pwd,user_nicname ) values (#{phone},#{pwd},#{nickname})
+
+    </insert>
+    <update id="AddAddress" >
+
+        update shop_user  set  user_addres=#{address},user_truename=#{name} where id=#{id}
+
+    </update>
+
+</mapper>
